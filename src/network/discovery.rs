@@ -17,10 +17,16 @@ pub fn setup_discovery(peers: Arc<Mutex<HashMap<String, Peer>>>) -> Result<()> {
 
     let mut buf = [0u8; 1024];
 
-    loop {
-        thread::sleep(Duration::from_secs(1));
-        socket.send_to(USERNAME.get().unwrap().as_bytes(), (group, port))?;
+    let send_socket = socket.try_clone()?;
+    let username = USERNAME.get().unwrap().as_bytes(); 
+    thread::spawn(move || {
+        loop {
+            thread::sleep(Duration::from_secs(1));
+            send_socket.send_to(username, (group, port)).unwrap();
+        }
+    });
 
+    loop {
         let (len, src) = socket.recv_from(&mut buf)?;
         let peer = String::from_utf8_lossy(&buf[..len]).to_string();
 

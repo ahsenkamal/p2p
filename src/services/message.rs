@@ -13,5 +13,5 @@ pub fn send_chat(text: String, peers: Arc<Mutex<HashMap<String, Peer>>>, state: 
 
     let chat = Chat::new(to, text);
     let packet = chat.create_packet().unwrap();
-    packet.send(stream);
+    // packet.send(stream);
 }
