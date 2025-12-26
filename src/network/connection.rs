@@ -9,7 +9,6 @@ use crate::network::State;
 
 pub fn setup_server(user_input: Arc<Mutex<String>>, state: Arc<Mutex<State>>) -> Result<()> {
     let listener = TcpListener::bind("0.0.0.0:9000")?;
-    println!("Listening on port 9000!");
 
     for stream in listener.incoming() {
         let user_input_clone = user_input.clone();

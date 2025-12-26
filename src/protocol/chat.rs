@@ -1,5 +1,5 @@
 use std::sync::{Arc, Mutex};
-use crate::{protocol::{Packet, enums::MessageType}, ui::utils::write_msg};
+use crate::{protocol::{Packet, enums::MessageType}, ui::core::write_msg};
 use crate::protocol::specs::USERNAME;
 use anyhow::Result;
 use serde::{Serialize, Deserialize};

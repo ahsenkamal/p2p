@@ -5,7 +5,6 @@ use anyhow::Result;
 use std::thread;
 use std::time::Duration;
 use crate::network::Peer;
-
 use crate::protocol::specs::USERNAME;
 
 pub fn setup_discovery(peers: Arc<Mutex<HashMap<String, Peer>>>) -> Result<()> {
