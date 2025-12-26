@@ -1,8 +1,9 @@
 use std::sync::{Arc, Mutex};
-use crate::{protocol::{Packet, enums::MessageType}, ui::print::write_msg};
+use crate::{protocol::{Packet, enums::MessageType}, ui::utils::write_msg};
 use crate::protocol::specs::USERNAME;
 use anyhow::Result;
 use serde::{Serialize, Deserialize};
+use crate::network::State;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Chat {
@@ -24,9 +25,9 @@ impl Chat {
         Ok(bincode::deserialize(payload)?)
     }
 
-    pub fn print(&self, input: Arc<Mutex<String>>) {
+    pub fn print(&self, input: Arc<Mutex<String>>, state: Arc<Mutex<State>>) {
         let msg = format!("{}: {}", self.from, self.text);
-        write_msg(msg, input);
+        write_msg(msg, input, state);
     }
 
     pub fn create_packet(&self) -> Result<Packet> {
