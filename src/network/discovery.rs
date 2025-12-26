@@ -23,8 +23,12 @@ pub fn setup_discovery(peers: Arc<Mutex<HashMap<String, Peer>>>) -> Result<()> {
 
         let (len, src) = socket.recv_from(&mut buf)?;
         let peer = String::from_utf8_lossy(&buf[..len]).to_string();
-        let peer_clone = peer.clone();
 
+        if peer == *USERNAME.get().unwrap() {
+            continue;
+        }
+
+        let peer_clone = peer.clone();
         peers.lock().unwrap().insert(peer, Peer::new(peer_clone, src.ip(), None));
     }
 }
