@@ -1,4 +1,6 @@
 use std::net::{TcpStream, IpAddr};
+use std::sync::{Arc, Mutex};
+use std::collections::HashMap;
 
 pub struct Peer {
     username: String,
@@ -13,5 +15,12 @@ impl Peer {
             ip,
             tcp_stream,
         }
+    }
+
+    pub fn get_tcp_stream(&mut self) -> &mut TcpStream {
+        self.tcp_stream.get_or_insert_with(|| {
+            let addr = format!("{}:9000", self.ip);
+            TcpStream::connect(addr).unwrap()
+        })
     }
 }

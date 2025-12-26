@@ -5,6 +5,7 @@ use crate::network::Peer;
 use crate::network::State;
 use crate::ui::core::redraw_input;
 use crossterm::event::{self, Event, KeyCode};
+use crate::services::message::send_chat;
 
 pub fn list_peers(peers: Arc<Mutex<HashMap<String, Peer>>>) {
     let peers = peers.lock().unwrap();
@@ -82,7 +83,7 @@ fn handle_command(command: String, peers: Arc<Mutex<HashMap<String, Peer>>>, sta
         }
 
         _ => {
-            println!("\nUnknown command: {}", parts[0]);
+            send_chat(command, peers, state);
         }
     }
 }

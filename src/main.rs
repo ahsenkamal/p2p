@@ -2,6 +2,7 @@ mod network;
 mod protocol;
 mod ui;
 mod utils;
+mod services;
 
 use std::{collections::HashMap, io, sync::{Arc, Mutex}, thread};
 use anyhow::Result;

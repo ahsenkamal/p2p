@@ -6,6 +6,8 @@ use crate::protocol::{Packet, Chat};
 use crate::protocol::specs::CURRENT_VERSION;
 use crate::protocol::enums::{MessageType};
 use crate::network::State;
+use std::collections::HashMap;
+use crate::network::Peer;
 
 pub fn setup_server(user_input: Arc<Mutex<String>>, state: Arc<Mutex<State>>) -> Result<()> {
     let listener = TcpListener::bind("0.0.0.0:9000")?;
