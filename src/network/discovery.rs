@@ -28,7 +28,7 @@ pub fn setup_discovery(peers: Arc<Mutex<HashMap<String, Peer>>>) -> Result<()> {
 
     loop {
         let (len, src) = socket.recv_from(&mut buf)?;
-        let peer = String::from_utf8_lossy(&buf[..len]).to_string();
+        let peer = String::from_utf8_lossy(&buf[..len]).trim().to_string();
 
         if peer == *USERNAME.get().unwrap() {
             continue;

@@ -22,9 +22,9 @@ pub fn list_peers(peers: Arc<Mutex<HashMap<String, Peer>>>) {
 }
 
 pub fn select_peer(target: &str, peers: Arc<Mutex<HashMap<String, Peer>>>, state: Arc<Mutex<State>>) {
-    let peers = peers.lock().unwrap();
+    let peers_guard = peers.lock().unwrap();
     println!();
-    if peers.contains_key(target) {
+    if peers_guard.contains_key(target) {
         state.lock().unwrap().change_to(target.to_string());
         println!("Connected to {}", target);
     } else {

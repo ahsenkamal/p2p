@@ -2,6 +2,7 @@ use std::net::{TcpStream, IpAddr};
 use std::sync::{Arc, Mutex};
 use std::collections::HashMap;
 
+#[derive(Debug)]
 pub struct Peer {
     username: String,
     ip: IpAddr,

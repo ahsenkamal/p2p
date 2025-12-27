@@ -18,6 +18,7 @@ fn main() -> Result<()> {
     println!("Please enter username:");
     let mut username = String::new();
     io::stdin().read_line(&mut username).unwrap();
+    username = username.trim().to_string();
     USERNAME.set(username.clone()).unwrap();
 
     let state = Arc::new(Mutex::new(State::new(username)));
